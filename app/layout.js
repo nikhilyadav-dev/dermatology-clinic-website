@@ -1,5 +1,6 @@
-import Announcement from "@/components/layout/announcement";
+import Announcement from "@/components/layout/Announcement";
 import { Navbar } from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { montserrat, inter } from "./font";
 import "./globals.css";
 
@@ -16,9 +17,10 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <Announcement />
-        <Navbar />
+        <Navbar className="sticky z-100 top-0" />
 
         {children}
+        <Footer />
       </body>
     </html>
   );
