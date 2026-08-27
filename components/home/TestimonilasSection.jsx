@@ -1,14 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
-import { Avatar, AvatarFallback } from "@/components/ui/avtar";
+import TestimonialCard from "@/components/ui/testimonials-card";
 
-// PLACEHOLDER CONTENT — fictional examples to preview the layout only.
-// Replace every entry with real, consented patient reviews before launch.
-// Do not publish fabricated testimonials.
 const testimonials = [
   {
     quote:
@@ -80,26 +75,24 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export function TestimonialsSection() {
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] py-20">
-      {/* soft brand-colored glow, purely decorative */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-
-      <div className="relative mx-auto max-w-5xl px-4">
-        <div className="mx-auto flex max-w-sm flex-col items-center justify-center gap-4 text-center">
-          <div className="rounded-full border border-primary/20 bg-[var(--accent)] px-4 py-1.5 text-sm font-medium text-primary">
-            Patient Stories
-          </div>
-          <h2 className="font-bold text-3xl tracking-tight text-[var(--foreground)] lg:text-4xl">
-            What our patients say
+    <section className="relative overflow-hidden bg-background-2 py-20">
+      <div className="relative mx-auto max-w-8xl px-4">
+        <div className="mx-auto mb-12 max-w-4xl text-center">
+          <span className="text-center text-sm font-semibold uppercase tracking-[0.25em] text-primary font-heading">
+            Patient stories
+          </span>
+          <h2 className="mt-3 text-center text-2xl font-bold tracking-tight text-forground sm:text-3xl lg:text-4xl font-heading">
+            In their own words.
           </h2>
-          <p className="text-sm text-[var(--foreground)]/60">
-            Real experiences from people who trusted us with their skin.
+          <p className="mx-auto mt-4 max-w-xl text-center text-foreground/60">
+            Every patient has a different concern, journey and goal. Here are a
+            few experiences shared by people who trusted us with their care.
           </p>
         </div>
 
         <div
           className={cn(
-            "mt-12 flex h-[560px] justify-center gap-6",
+            "mt-12 flex h-140 justify-center gap-6",
             "[mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]",
           )}
         >
@@ -144,53 +137,3 @@ export function TestimonialsSection() {
     </section>
   );
 }
-
-function TestimonialCard({ testimonial }) {
-  const { quote, name, treatment, rating } = testimonial;
-  return (
-    <motion.figure
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="w-72 shrink-0 rounded-3xl border border-[var(--muted)] bg-[var(--surface)] p-6 shadow-md shadow-[var(--foreground)]/5 transition-shadow hover:shadow-lg hover:shadow-primary/10"
-    >
-      <div className="flex items-center justify-between">
-        <Quote className="h-6 w-6 fill-primary/15 text-primary/40" />
-        <div className="flex gap-0.5">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              className={cn(
-                "h-3.5 w-3.5",
-                i < rating
-                  ? "fill-primary text-primary"
-                  : "fill-[var(--muted)] text-[var(--muted)]",
-              )}
-            />
-          ))}
-        </div>
-      </div>
-
-      <blockquote className="mt-4 text-sm leading-relaxed text-[var(--foreground)]/80">
-        {quote}
-      </blockquote>
-
-      <figcaption className="mt-5 flex items-center justify-between gap-2 border-t border-[var(--muted)] pt-4">
-        <div className="flex items-center gap-2">
-          <Avatar className="size-8">
-            <AvatarFallback className="bg-primary/10 text-xs font-semibold text-primary">
-              {name.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
-          <cite className="text-sm font-medium not-italic tracking-tight text-[var(--foreground)]">
-            {name}
-          </cite>
-        </div>
-        <span className="rounded-full bg-primary/5 px-2.5 py-1 text-[11px] font-medium text-primary">
-          {treatment}
-        </span>
-      </figcaption>
-    </motion.figure>
-  );
-}
-
-export default TestimonialsSection;

@@ -12,9 +12,18 @@
 
   --navbar: var(--navbar-bg);
 
+  --color-background: var(--background);
+  --color-background-2: var(--background-2);
+
   --color-hover-background: var(--color-1);
   --color-hover-foreground: var(--hover-foreground);
-  /* ------------------------------------------------------------------------ */
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -23,14 +32,10 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
+  /* ------------------------------------------------------------------------ */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -111,42 +116,67 @@
   --font-heading: var(--font-montserrat), Arial, Helvetica, sans-serif;
   --font-body: var(--font-inter), Arial, Helvetica, sans-serif;
 
-  --primary: #db2777;
-  --primary-foreground: #ffffff;
-  --primary-hover: #c2185e;
+  /* =========================
+     BRAND
+  ========================= */
 
-  --secondary: #1f2937;
+  --primary: #ec4899;
+  --primary-foreground: #ffffff;
+  --primary-hover: #db2777;
+
+  /* =========================
+     SECONDARY
+  ========================= */
+
+  --secondary: #1f2937; /* UI elements only, not text */
   --secondary-foreground: #ffffff;
 
+  /* =========================
+     PAGE
+  ========================= */
+
   --background: #ffffff;
-  /* --foreground: #241c24; */
+  --background-2: #f9fafb;
+  --foreground: #241c24; /* all text, headings included */
 
-  --cta-button-bg: #db2777;
-  --cta-button-text: #ffffff;
+  /* =========================
+     SURFACE
+  ========================= */
 
-  --color-1: 333 71% 51%; /* primary pink */
-  --color-2: 335 78% 43%; /* deep rose (hover/pressed states) */
-  --color-3: 338 60% 65%; /* mid pink */
-  --color-4: 338 80% 80%; /* soft blush */
-  --color-5: 338 100% 98%; /* near-white pink tint */
+  --surface: #ffffff; /* neutral now — matches background-2 */
 
-  --accent: #fff4f8;
-  /* --muted: #ece6e8; */
-  --surface: #fffafb;
-  --navbar-bg: #fffc;
+  /* =========================
+     MUTED
+  ========================= */
+
+  --muted: #e5e7eb; /* neutral now — matches background-2 */
+
+  /* =========================
+     ACCENT
+  ========================= */
+
+  --accent: #fff4f8; /* the ONE deliberate pink surface */
+
+  /* =========================
+     BORDERS
+  ========================= */
+
+  --border: #e5e7eb;
+
+  /* =========================
+     HOVER
+  ========================= */
 
   --hover-background: #fef8f7;
   --hover-foreground: #db2777;
 
-  /* ------------------------------------------------------------------------ */
+  --cta-button-bg: #db2777;
+  --cta-button-text: #ffffff;
+  --navbar-bg: #fffc;
 
-  /* --muted: #ec4899; */
-  --muted-foreground: #09090b;
-
-  --accent: #f4f4f5;
-  --accent-foreground: #18181b;
-  --destructive: #ef4444;
-  --border: #e4e4e7;
+  /* =========================
+   
+  ========================= */
 
   --primary-50: #fdf2f8;
   --primary-100: #fce7f3;
@@ -256,5 +286,9 @@
   button,
   a {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  a {
+    text-decoration-line: none !important ;
   }
 }
