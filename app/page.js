@@ -19,7 +19,7 @@ const CLINIC_IMAGES = [
 
 export default function MarqueeHeroSection() {
   return (
-    <>
+    <main>
       <AnimatedMarqueeHero
         tagline="Dermatologist-led skin & aesthetic care"
         lines={["Healthy Skin.", "Honest Care."]}
@@ -43,6 +43,6 @@ export default function MarqueeHeroSection() {
       <ContactSection />
       <FAQSection />
       <CTASection />
-    </>
+    </main>
   );
 }

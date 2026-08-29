@@ -1,217 +1,229 @@
-// import Link from "next/link";
-
-// const concerns = [
-//   {
-//     title: "Acne & Acne Scars",
-//     treatments: "Peels · MNRF · Laser",
-//     image:
-//       "https://i.pinimg.com/1200x/0a/ef/ac/0aefacb4bb895cf22ee0426470429eae.jpg",
-//     href: "/concerns/acne",
-//   },
-//   {
-//     title: "Pigmentation & Melasma",
-//     treatments: "Peels · Laser · Skin Care",
-//     image:
-//       "https://i.pinimg.com/1200x/33/f9/5f/33f95fd49f428032ce8b4c2feb04003b.jpg",
-//     href: "/concerns/pigmentation",
-//   },
-//   {
-//     title: "Hair Loss & Thinning",
-//     treatments: "PRP · GFC · Hair Care",
-//     image:
-//       "https://i.pinimg.com/1200x/c6/3b/d1/c63bd14e3d9bbffecb848eccc05ace6a.jpg",
-//     href: "/concerns/hair-loss",
-//   },
-//   {
-//     title: "Anti-Ageing & Wrinkles",
-//     treatments: "Botox · Fillers · HIFU",
-//     image:
-//       "https://i.pinimg.com/736x/87/b6/d2/87b6d263eb138f9542f73f716dfbcb83.jpg",
-//     href: "/concerns/anti-aging",
-//   },
-//   {
-//     title: "Unwanted Hair",
-//     treatments: "Laser Hair Reduction",
-//     image:
-//       "https://i.pinimg.com/736x/b5/a0/f5/b5a0f5e9b2fd3328dd86e690e2887438.jpg",
-//     href: "/concerns/unwanted-hair",
-//   },
-//   {
-//     title: "Dull Skin & Brightening",
-//     treatments: "Peels · Facials · Skin Care",
-//     image:
-//       "https://i.pinimg.com/736x/9e/3b/b2/9e3bb2661315a9235ba6f90a0f6db2cf.jpg",
-//     href: "/concerns/dull-skin",
-//   },
-// ];
-
-// export default function Concerns() {
-//   return (
-//     <section id="concerns" className="py-20 md:py-28 bg-background-2">
-//       <div className="mx-auto max-w-7xl px-4 md:px-6">
-//         {/* Section Header */}
-//         <div className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
-//           <div className="max-w-2xl">
-//             <span className="font-heading text-sm font-medium uppercase tracking-wider text-primary">
-//               Your concerns
-//             </span>
-
-//             <h2 className="mt-3 font-heading text-3xl font-semibold tracking-tight md:text-5xl">
-//               Care designed around your skin concerns.
-//             </h2>
-//           </div>
-
-//           <p className="max-w-md text-sm leading-6 text-muted-foreground md:text-base">
-//             From acne and pigmentation to hair loss and ageing, discover
-//             personalized treatments designed around your needs.
-//           </p>
-//         </div>
-
-//         {/* Concerns Grid */}
-//         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-//           {concerns.map((concern) => (
-//             <Link
-//               key={concern.title}
-//               href={concern.href}
-//               className="group overflow-hidden rounded-2xl border bg-background transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-//             >
-//               {/* Image */}
-//               <div className="relative aspect-[4/3] overflow-hidden">
-//                 <img
-//                   src={concern.image}
-//                   alt={concern.title}
-//                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-//                 />
-//               </div>
-
-//               {/* Content */}
-//               <div className="flex items-center justify-between gap-4 p-5">
-//                 <div>
-//                   <h3 className="font-heading text-lg font-semibold">
-//                     {concern.title}
-//                   </h3>
-
-//                   <p className="mt-1 text-sm text-muted-foreground">
-//                     {concern.treatments}
-//                   </p>
-//                 </div>
-
-//                 <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-hover-background text-hover-foreground transition-transform duration-300 group-hover:translate-x-1">
-//                   →
-//                 </div>
-//               </div>
-//             </Link>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 
 import { motion } from "framer-motion";
 import { ConcernCard } from "@/components/ui/concern-card";
 import { ViewAllCard } from "@/components/ui/Viewallcard";
 
-const TOTAL_CONCERNS = 12;
+const TOTAL_CONCERNS = 25;
 const concerns = [
   {
     image:
-      "https://i.pinimg.com/1200x/0a/ef/ac/0aefacb4bb895cf22ee0426470429eae.jpg",
+      "https://i.pinimg.com/736x/1e/1c/6b/1e1c6b1a554b6eaad635ac334ef4a40d.jpg",
     badge: "Most Booked",
     name: "Acne & Acne Scars",
-    treatments: ["Chemical Peels", "MNRF"],
-    href: "/concerns/acne",
+    slug: "acne-acne-scars",
+    treatments: [
+      "Chemical Peels",
+      "Microneedling",
+      "RF Microneedling",
+      "Laser Treatments",
+    ],
+    href: "/concerns/acne-acne-scars",
   },
+
   {
     image:
-      "https://i.pinimg.com/1200x/33/f9/5f/33f95fd49f428032ce8b4c2feb04003b.jpg",
+      "https://i.pinimg.com/736x/14/3f/c7/143fc7abc00b88d85d8eef183cff868f.jpg",
+    badge: "",
     name: "Pigmentation & Melasma",
-    treatments: ["Cosmelan", "Dermamelan"],
+    slug: "pigmentation-melasma",
+    treatments: ["Chemical Peels", "IPL", "Laser Treatments", "Microneedling"],
     href: "/concerns/pigmentation-melasma",
   },
+
   {
     image:
-      "https://i.pinimg.com/736x/87/b6/d2/87b6d263eb138f9542f73f716dfbcb83.jpg",
-    name: "Anti-Ageing & Wrinkles",
-    treatments: ["Botox", "Fillers", "HIFU"],
-    href: "/concerns/anti-ageing-wrinkles",
+      "https://i.pinimg.com/736x/b7/d8/0f/b7d80f702b830bc69f6d1d15fa5db81f.jpg",
+    badge: "",
+    name: "Dark Spots & Sun Damage",
+    slug: "dark-spots-sun-damage",
+    treatments: ["Chemical Peels", "IPL", "Laser Treatments"],
+    href: "/concerns/dark-spots-sun-damage",
   },
+
   {
     image:
-      "https://i.pinimg.com/1200x/c6/3b/d1/c63bd14e3d9bbffecb848eccc05ace6a.jpg",
+      "https://i.pinimg.com/1200x/0c/05/08/0c0508e4776d19d33379225719f95765.jpg",
+    badge: "",
     name: "Hair Loss & Thinning",
-    treatments: ["PRP", "GFC"],
+    slug: "hair-loss-thinning",
+    treatments: [
+      "PRP",
+      "Hair Mesotherapy",
+      "Growth Factor Therapy",
+      "Low-Level Laser Therapy",
+      "Hair Transplant",
+    ],
     href: "/concerns/hair-loss-thinning",
   },
+
+  {
+    image:
+      "https://i.pinimg.com/1200x/4a/cb/d2/4acbd2a0291ea1695613ed7f11cd3171.jpg",
+    badge: "",
+    name: "Wrinkles & Fine Lines",
+    slug: "wrinkles-fine-lines",
+    treatments: [
+      "Botox",
+      "Dermal Fillers",
+      "Chemical Peels",
+      "Microneedling",
+      "RF Microneedling",
+    ],
+    href: "/concerns/wrinkles-fine-lines",
+  },
+
   {
     image:
       "https://i.pinimg.com/736x/b5/a0/f5/b5a0f5e9b2fd3328dd86e690e2887438.jpg",
-    badge: "Popular",
+    badge: "",
     name: "Unwanted Hair",
-    treatments: ["Laser Hair Reduction"],
+    slug: "unwanted-hair",
+    treatments: ["Laser Hair Removal"],
     href: "/concerns/unwanted-hair",
   },
+
   {
     image:
       "https://i.pinimg.com/736x/9e/3b/b2/9e3bb2661315a9235ba6f90a0f6db2cf.jpg",
-    name: "Dull Skin & Brightening",
-    treatments: ["Glutathione", "Medifacial"],
-    href: "/concerns/dull-skin-brightening",
+    badge: "",
+    name: "Dull & Uneven Skin",
+    slug: "dull-uneven-skin",
+    treatments: [
+      "Chemical Peels",
+      "Microdermabrasion",
+      "Dermaplaning",
+      "PRP Facial",
+      "Mesotherapy",
+      "IPL",
+    ],
+    href: "/concerns/dull-uneven-skin",
   },
+
   {
     image:
-      "https://i.pinimg.com/736x/21/1c/4a/211c4aefe59ac290087f002ff7aa5a92.jpg",
-    name: "Stubborn Fat Pockets",
-    treatments: ["Lipolysis Injections"],
-    href: "/concerns/stubborn-fat-pockets",
+      "https://i.pinimg.com/1200x/08/55/bb/0855bb064a7c0b4b8e4e941db33d94bb.jpg",
+    badge: "",
+    name: "Scars & Stretch Marks",
+    slug: "scars-stretch-marks",
+    treatments: [
+      "Microneedling",
+      "RF Microneedling",
+      "Chemical Peels",
+      "Laser Treatments",
+    ],
+    href: "/concerns/scars-stretch-marks",
   },
-  // {
-  //   image:
-  //     "https://i.pinimg.com/1200x/89/76/8e/89768e031d126dbdbc42289fd6f0b4e1.jpg",
-  //   name: "Nail Issues",
-  //   treatments: ["Day-Care Surgery"],
-  //   href: "/concerns/nail-surgery",
-  // },
+
+  {
+    image:
+      "https://i.pinimg.com/236x/97/d6/1d/97d61d9ec69edefe80dfec82dc3ceff3.jpg",
+    badge: "",
+    name: "Facial Sagging & Loss of Volume",
+    slug: "facial-sagging-volume-loss",
+    treatments: ["HIFU", "Thread Lift", "Dermal Fillers", "Facial Contouring"],
+    href: "/concerns/facial-sagging-volume-loss",
+  },
+
+  {
+    image:
+      "https://i.pinimg.com/736x/72/77/a0/7277a0cd769bd5a9dbaca40df782b4af.jpg",
+    badge: "",
+    name: "Dandruff & Scalp Conditions",
+    slug: "dandruff-scalp-conditions",
+    treatments: ["Scalp Treatment", "Scalp Mesotherapy"],
+    href: "/concerns/dandruff-scalp-conditions",
+  },
+
+  {
+    image:
+      "https://i.pinimg.com/236x/a8/83/23/a883232b3c1553d8df317c1c25f1381d.jpg",
+    badge: "",
+    name: "Eczema & Dermatitis",
+    slug: "eczema-dermatitis",
+    treatments: [
+      "Medical Dermatology Treatment",
+      "Prescription Treatment",
+      "Patch Testing",
+    ],
+    href: "/concerns/eczema-dermatitis",
+  },
+
+  {
+    image:
+      "https://i.pinimg.com/736x/4c/d0/83/4cd083c715aa42f77501c264c8b250b4.jpg",
+    badge: "",
+    name: "Psoriasis",
+    slug: "psoriasis",
+    treatments: ["Medical Dermatology Treatment", "Prescription Treatment"],
+    href: "/concerns/psoriasis",
+  },
+
+  {
+    image:
+      "https://i.pinimg.com/736x/4e/d7/2d/4ed72d7e0a657f8a7fd177911125a643.jpg",
+    badge: "",
+    name: "Rosacea & Facial Redness",
+    slug: "rosacea-facial-redness",
+    treatments: ["Medical Dermatology Treatment", "Laser Treatment"],
+    href: "/concerns/rosacea-facial-redness",
+  },
+
+  {
+    image:
+      "https://i.pinimg.com/736x/66/61/01/6661014e45e624bb8a4dbac6f90e22e3.jpg",
+    badge: "",
+    name: "Warts, Moles & Skin Growths",
+    slug: "warts-moles-skin-growths",
+    treatments: [
+      "Wart Removal",
+      "Mole Removal",
+      "Skin Tag Removal",
+      "Skin Lesion Removal",
+    ],
+    href: "/concerns/warts-moles-skin-growths",
+  },
+
+  {
+    image:
+      "https://i.pinimg.com/736x/c4/7c/82/c47c82ea7d2a08ccaa67593e7834af3b.jpg",
+    badge: "",
+    name: "Skin Infections",
+    slug: "skin-infections",
+    treatments: ["Medical Dermatology Treatment", "Prescription Treatment"],
+    href: "/concerns/skin-infections",
+  },
+
+  {
+    image:
+      "https://i.pinimg.com/736x/1e/39/8a/1e398a70efd5113e8252e00f992d61c7.jpg",
+    badge: "",
+    name: "Vitiligo",
+    slug: "vitiligo",
+    treatments: ["Vitiligo Treatment"],
+    href: "/concerns/vitiligo",
+  },
 ];
 
 export function ConcernsSection() {
   return (
     <section className="w-full bg-background-2 py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
-        {/* <div className="mx-auto mb-12 max-w-2xl text-center">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">
-            Start With Your Concern
+        <div className="mx-auto mb-12 max-w-4xl text-center">
+          <span className="text-center text-sm font-semibold uppercase tracking-[0.25em] text-primary font-heading">
+            Your concerns
           </span>
-          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl font-heading">
-            Find The Right Care, By What's Actually Bothering You
-          </h1>
-          <p className="mt-3 text-sm leading-relaxed text-[var(--foreground)]/60 md:text-base">
-            Every concern here is matched to a treatment plan Dr. Gandhi reviews
-            personally — not a generic one-size-fits-all package.
-          </p>
-        </div> */}
-
-        <div className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <span className="font-heading text-sm font-bold uppercase tracking-wider text-primary">
-              Your concerns
-            </span>
-
-            <h2 className="mt-4 font-heading text-3xl font-semibold tracking-tight md:text-5xl text-foreground">
-              Care designed around your skin concerns.
-            </h2>
-          </div>
-
-          <p className="max-w-md text-sm leading-6 md:text-base text-foreground">
+          <h2 className="mt-3 text-center text-2xl font-bold tracking-tight text-forground sm:text-3xl lg:text-4xl font-heading">
+            Care designed around your skin concerns.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-center text-foreground/60">
             From acne and pigmentation to hair loss and ageing, discover
             personalized treatments designed around your needs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 mt-2">
-          {concerns.map((concern, i) => (
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mt-2">
+          {concerns.slice(0, 7).map((concern, i) => (
             <motion.div
               key={concern.name}
               initial={{ opacity: 0, y: 14 }}

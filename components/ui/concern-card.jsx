@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export function ConcernCard({
   image,
@@ -23,13 +24,14 @@ export function ConcernCard({
       )}
     >
       {/* Photo */}
-      <div className="relative aspect-4/3 overflow-hidden">
-        <img
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <Image
           src={image}
           alt=""
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          fill
         />
-        {/* gradient so any badge/text over the photo stays legible */}
+
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/35 via-transparent to-transparent" />
 
         {badge && (
@@ -50,7 +52,7 @@ export function ConcernCard({
 
         {treatments.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {treatments.map((t) => (
+            {treatments.slice(0, 2).map((t) => (
               <span
                 key={t}
                 className="rounded-full bg-accent px-2.5 py-1 text-[11px] font-medium text-primary"

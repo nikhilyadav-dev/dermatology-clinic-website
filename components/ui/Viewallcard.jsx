@@ -13,7 +13,7 @@ export function ViewAllCard({
       href={href}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="group flex aspect-4/3 flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-primary/25 bg-accent p-4 text-center transition-colors duration-300 hover:border-primary/50 hover:bg-primary/10"
+      className="group flex h-full  flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-primary/25 bg-accent p-4 text-center transition-colors duration-300 hover:border-primary/50 hover:bg-primary/10"
     >
       <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white transition-transform duration-300 group-hover:scale-110">
         <ArrowRight className="h-5 w-5" />

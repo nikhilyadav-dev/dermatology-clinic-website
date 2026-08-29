@@ -109,22 +109,22 @@ const treatments = [
 
 export function TreatmentsSection() {
   return (
-    <section className="w-full bg-[var(--background)] py-16 md:py-20">
+    <section className="w-full bg-background py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">
+        <div className="mx-auto mb-12 max-w-4xl text-center">
+          <span className="text-center text-sm font-semibold uppercase tracking-[0.25em] text-primary font-heading">
             Treatments
           </span>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[var(--foreground)] md:text-4xl">
+          <h2 className="mt-3 text-center text-2xl font-bold tracking-tight text-forground sm:text-3xl lg:text-4xl font-heading">
             Care built around your skin
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[var(--foreground)]/60 md:text-base">
+          <p className="mx-auto mt-4 max-w-xl text-center text-foreground/60">
             Every treatment is reviewed for your skin specifically — nothing
             here is a one-size-fits-all package.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 pt-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className=" pt-4 sm:grid-cols-2  grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {treatments.map((t, i) => (
             <motion.div
               key={t.name}

@@ -70,7 +70,7 @@ export function FAQSection() {
         </p>
 
         <div className="mt-10">
-          <Accordion type="single" collapsible className="space-y-2">
+          <Accordion type="single" className="space-y-2">
             {faqs.map((faq, i) => {
               const Icon = faq.icon;
               return (
