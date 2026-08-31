@@ -122,7 +122,7 @@ export const Navbar = () => {
           <NavigationMenu className="hidden lg:block">
             <NavigationMenuList className="flex items-center justify-center gap-1 ">
               <NavigationMenuItem>
-                <NavigationMenuLink href="#" className={navLinkClass}>
+                <NavigationMenuLink href="/" className={navLinkClass}>
                   Home
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -159,9 +159,12 @@ export const Navbar = () => {
                     ))}
                     <div className="col-span-full flex items-center justify-between gap-4 border-t p-3 pb-1 text-sm font-normal text-foreground">
                       <span>26 Treatments In Total</span>
-                      <button className="rounded-full bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/80">
+                      <a
+                        href="/tratments"
+                        className="rounded-full bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/80"
+                      >
                         View All Treatments
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </NavigationMenuContent>
@@ -194,9 +197,12 @@ export const Navbar = () => {
                     ))}
                     <div className="col-span-full flex items-center justify-between gap-4 border-t p-3 pb-1 text-sm font-normal text-foreground">
                       <span>Every concern reviewed by a dermatologist</span>
-                      <button className="rounded-full bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/80">
+                      <a
+                        href="/concerns"
+                        className="rounded-full bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/80"
+                      >
                         View All Concerns
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </NavigationMenuContent>
@@ -270,7 +276,7 @@ export const Navbar = () => {
                     instead of hugging the text at font-size alone */}
                 <div className="flex flex-col gap-1">
                   <a
-                    href="#"
+                    href="/"
                     className="rounded-md px-2 py-3 font-medium hover:bg-[var(--hover-background)]"
                   >
                     Home

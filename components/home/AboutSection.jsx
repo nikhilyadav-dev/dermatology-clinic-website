@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
-import { ImageSlider } from "@/components/ui/image-slider";
+import { ImageSlider } from "@/components/home/image-slider";
 
 const DOCTOR_IMAGES = [
   {

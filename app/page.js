@@ -1,4 +1,4 @@
-import { AnimatedMarqueeHero } from "@/components/ui/animated-marquee-hero";
+import { AnimatedMarqueeHero } from "@/components/home/animated-marquee-hero";
 import { TestimonialsSection } from "@/components/home/TestimonilasSection";
 import { AboutDoctorSection } from "@/components/home/AboutSection";
 import { StatsSection } from "@/components/home/StatusSection";
