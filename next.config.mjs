@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
-  allowedDevOrigins: ["10.51.51.61"],
+  allowedDevOrigins: ["192.168.1.45"],
 
   images: {
     remotePatterns: [
