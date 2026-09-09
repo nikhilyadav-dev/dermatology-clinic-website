@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { TreatmentCard } from "@/components/tratments/tretment-card";
+import { TreatmentCard } from "@/components/treatments/tretment-card";
 import { ViewAllCard } from "@/components/ui/Viewallcard";
 import { getHomepageTreatments } from "@/lib/content";
 

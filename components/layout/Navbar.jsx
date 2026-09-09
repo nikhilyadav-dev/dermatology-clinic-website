@@ -94,10 +94,6 @@ export const Navbar = () => {
   const secondaryCta = { label: "+91 9619957525", href: "#treatments" };
 
   return (
-    // FIX: min-h-21 and z-100 are not valid Tailwind classes (default scale
-    // stops at h-96 for height and z-50 for z-index) — they were silently
-    // doing nothing. min-h-20 (80px) is a real token; z-[60] is bracket
-    // syntax for an arbitrary value, safely above dropdowns/sheets at z-50.
     <header className="sticky top-0 z-[60] w-full min-h-20  bg-background shadow-md">
       <div className="w-full px-4 py-3">
         <nav className="flex items-center justify-between">
@@ -160,7 +156,7 @@ export const Navbar = () => {
                     <div className="col-span-full flex items-center justify-between gap-4 border-t p-3 pb-1 text-sm font-normal text-foreground">
                       <span>26 Treatments In Total</span>
                       <a
-                        href="/tratments"
+                        href="/treatments"
                         className="rounded-full bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/80"
                       >
                         View All Treatments
@@ -231,8 +227,6 @@ export const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Desktop CTA — explicit h-11 (44px) so it has a fixed, predictable
-              size instead of growing/shrinking with its py value */}
           <div className="hidden lg:flex lg:items-center">
             <motion.a
               href={primaryCta.href}
@@ -272,8 +266,6 @@ export const Navbar = () => {
               </SheetHeader>
 
               <div className="flex flex-col p-4">
-                {/* Tap targets: py-3 gives each row a real 44px+ touch area
-                    instead of hugging the text at font-size alone */}
                 <div className="flex flex-col gap-1">
                   <a
                     href="/"

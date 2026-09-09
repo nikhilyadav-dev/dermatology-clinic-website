@@ -15,6 +15,7 @@ const treatments = [
     category: "Hair",
     tag: "Signature",
     concerns: ["hair-loss-thinning"],
+    href: "/treatments/hair-transplant",
   },
 
   {
@@ -29,6 +30,7 @@ const treatments = [
     category: "Hair",
     tag: "",
     concerns: ["hair-loss-thinning"],
+    href: "/treatments/hair-loss-treatment",
   },
 
   {
@@ -43,6 +45,7 @@ const treatments = [
     category: "Hair",
     tag: "",
     concerns: ["hair-loss-thinning"],
+    href: "/treatments/hair-gfc-prp",
   },
 
   {
@@ -57,6 +60,7 @@ const treatments = [
     category: "Hair",
     tag: "",
     concerns: ["hair-loss-thinning"],
+    href: "/treatments/drs-1512",
   },
 
   {
@@ -71,6 +75,7 @@ const treatments = [
     category: "Hair",
     tag: "",
     concerns: ["hair-loss-thinning"],
+    href: "/treatments/regenera-activa",
   },
 
   // ─────────────────────────────────────────────
@@ -89,6 +94,7 @@ const treatments = [
     category: "Acne",
     tag: "Acne Scars",
     concerns: ["acne-acne-scars", "scars-stretch-marks"],
+    href: "/treatments/acne-scar-reduction",
   },
 
   {
@@ -102,12 +108,14 @@ const treatments = [
     duration: "",
     category: "Acne",
     tag: "",
+
     concerns: [
       "acne-acne-scars",
       "wrinkles-fine-lines",
       "dull-uneven-skin",
       "scars-stretch-marks",
     ],
+    href: "/treatments/dermapen",
   },
 
   {
@@ -122,6 +130,7 @@ const treatments = [
     category: "Acne",
     tag: "",
     concerns: ["acne-acne-scars", "dull-uneven-skin"],
+    href: "/treatments/face-prp",
   },
 
   {
@@ -142,6 +151,7 @@ const treatments = [
       "dull-uneven-skin",
       "scars-stretch-marks",
     ],
+    href: "/treatments/fractional-co2",
   },
 
   {
@@ -161,6 +171,7 @@ const treatments = [
       "dull-uneven-skin",
       "scars-stretch-marks",
     ],
+    href: "/treatments/mnrf-treatment",
   },
 
   // ─────────────────────────────────────────────
@@ -175,10 +186,12 @@ const treatments = [
       "https://i.pinimg.com/1200x/4e/90/31/4e9031872d18d1555db67122cc15d6c7.jpg",
     description:
       "Hyaluronic acid fillers for cheek, lip, chin and under-eye contouring with subtle, refined results.",
-    duration: "40 min",
+    duration: "  min",
     category: "Injectables",
+    href: "/treatments/dermal-fillers",
     tag: "",
     concerns: ["wrinkles-fine-lines", "facial-sagging-loss-of-volume"],
+    href: "/treatments/dermal-fillers",
   },
 
   {
@@ -193,6 +206,7 @@ const treatments = [
     category: "Injectables",
     tag: "",
     concerns: ["stubborn-fat-pockets"],
+    href: "/treatments/lipolysis-injection",
   },
 
   {
@@ -207,6 +221,7 @@ const treatments = [
     category: "Injectables",
     tag: "",
     concerns: ["wrinkles-fine-lines", "dull-uneven-skin"],
+    href: "/treatments/pdrn-treatment",
   },
 
   {
@@ -221,6 +236,7 @@ const treatments = [
     category: "Injectables",
     tag: "",
     concerns: ["wrinkles-fine-lines", "dull-uneven-skin"],
+    href: "/treatments/skin-booster",
   },
 
   {
@@ -235,6 +251,7 @@ const treatments = [
     category: "Injectables",
     tag: "",
     concerns: ["facial-sagging-loss-of-volume", "wrinkles-fine-lines"],
+    href: "/treatments/thread-lifting",
   },
 
   // ─────────────────────────────────────────────
@@ -253,6 +270,7 @@ const treatments = [
     category: "Lasers",
     tag: "",
     concerns: ["facial-sagging-loss-of-volume", "wrinkles-fine-lines"],
+    href: "/treatments/hifu-wrinkle-one",
   },
 
   {
@@ -272,6 +290,7 @@ const treatments = [
       "dull-uneven-skin",
       "rosacea-facial-redness",
     ],
+    href: "/treatments/ipl-treatment",
   },
 
   {
@@ -286,6 +305,7 @@ const treatments = [
     category: "Lasers",
     tag: "",
     concerns: ["unwanted-hair"],
+    href: "/treatments/laser-hair-reduction",
   },
 
   {
@@ -300,6 +320,7 @@ const treatments = [
     category: "Lasers",
     tag: "",
     concerns: ["tattoo-removal"],
+    href: "/treatments/tattoo-removal",
   },
 
   // ─────────────────────────────────────────────
@@ -318,6 +339,7 @@ const treatments = [
     category: "Peels",
     tag: "",
     concerns: ["dull-uneven-skin"],
+    href: "/treatments/carbon-laser",
   },
 
   {
@@ -338,6 +360,7 @@ const treatments = [
       "dull-uneven-skin",
       "scars-stretch-marks",
     ],
+    href: "/treatments/chemical-peel",
   },
 
   {
@@ -352,6 +375,7 @@ const treatments = [
     category: "Peels",
     tag: "For Melasma",
     concerns: ["pigmentation-melasma", "dark-spots-sun-damage"],
+    href: "/treatments/cosmelan-treatment",
   },
 
   {
@@ -366,6 +390,7 @@ const treatments = [
     category: "Peels",
     tag: "",
     concerns: ["pigmentation-melasma", "dark-spots-sun-damage"],
+    href: "/treatments/dermamelan-treatment",
   },
 
   // ─────────────────────────────────────────────
@@ -384,6 +409,7 @@ const treatments = [
     category: "Skin",
     tag: "",
     concerns: ["dull-uneven-skin"],
+    href: "/treatments/glutathione-skin-lightening",
   },
 
   {
@@ -398,6 +424,7 @@ const treatments = [
     category: "Skin",
     tag: "",
     concerns: ["dull-uneven-skin"],
+    href: "/treatments/hydra-facial",
   },
 
   {
@@ -412,6 +439,7 @@ const treatments = [
     category: "Skin",
     tag: "Most Booked",
     concerns: ["acne-acne-scars", "dull-uneven-skin"],
+    href: "/treatments/medifacial",
   },
 
   // ─────────────────────────────────────────────
@@ -430,6 +458,7 @@ const treatments = [
     category: "Vitiligo",
     tag: "",
     concerns: ["vitiligo"],
+    href: "/treatments/excimer",
   },
 
   {
@@ -444,6 +473,7 @@ const treatments = [
     category: "Vitiligo",
     tag: "",
     concerns: ["vitiligo"],
+    href: "/treatments/nbuvb-therapy",
   },
 
   {
@@ -458,6 +488,7 @@ const treatments = [
     category: "Vitiligo",
     tag: "Popular",
     concerns: ["vitiligo"],
+    href: "/treatments/vitiligo-surgery",
   },
 
   // ─────────────────────────────────────────────
@@ -476,6 +507,7 @@ const treatments = [
     category: "Regenerative",
     tag: "New",
     concerns: ["hair-loss-thinning", "dull-uneven-skin", "wrinkles-fine-lines"],
+    href: "/treatments/exosomes-treatment",
   },
 
   // ─────────────────────────────────────────────
@@ -494,6 +526,7 @@ const treatments = [
     category: "Surgery",
     tag: "",
     concerns: ["warts-moles-skin-growths"],
+    href: "/treatments/cyst-surgery",
   },
 
   {
@@ -507,6 +540,7 @@ const treatments = [
     category: "Surgery",
     tag: "",
     concerns: [],
+    href: "/treatments/earlobe-surgery",
   },
 
   {
@@ -521,6 +555,7 @@ const treatments = [
     category: "Surgery",
     tag: "",
     concerns: ["nail-disorders-ingrown-nails"],
+    href: "/treatments/nail-surgery",
   },
 ];
 

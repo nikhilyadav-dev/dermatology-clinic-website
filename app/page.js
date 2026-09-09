@@ -5,8 +5,11 @@ import { StatsSection } from "@/components/home/StatusSection";
 import { ConcernsSection } from "@/components/home/ConcernsSection";
 import { FAQSection } from "@/components/home/FaqSection";
 import { TreatmentsSection } from "@/components/home/TretmentSection";
-import { CTASection } from "@/components/home/CTASection";
+import { CTASection } from "@/components/common/CTASection";
 import { ContactSection } from "@/components/home/ContactSection";
+
+import { homePageCTA } from "@/data/home";
+import { homePageFaqs } from "@/data/home";
 
 const CLINIC_IMAGES = [
   "https://i.pinimg.com/1200x/1d/b2/56/1db256909a04196744b5742db87a070e.jpg",
@@ -41,8 +44,8 @@ export default function MarqueeHeroSection() {
       <TreatmentsSection />
       <TestimonialsSection />
       <ContactSection />
-      <FAQSection />
-      <CTASection />
+      <FAQSection faqs={homePageFaqs} />
+      <CTASection cta={homePageCTA} />
     </main>
   );
 }

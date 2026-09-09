@@ -27,9 +27,11 @@ export function ConcernCard({
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={image}
-          alt=""
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          alt="concern image"
           fill
+          priority
+          sizes="(max-width: 1024px) 85vw, 430px"
+          className="object-cover"
         />
 
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/35 via-transparent to-transparent" />

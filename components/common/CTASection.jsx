@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 
-export function CTASection() {
+export function CTASection({ cta }) {
+  if (!cta) return null;
   return (
     <section className="w-full px-4 py-16 md:py-20">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-linear-to-br from-primary via-primary to-primary-hover px-6 py-16 text-center shadow-xl shadow-primary/20 md:px-12 md:py-20">
@@ -19,16 +20,15 @@ export function CTASection() {
           className="relative"
         >
           <span className="inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary-foreground font-heading">
-            Start Today
+            {cta.eyebrow}
           </span>
 
           <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-extrabold leading-tight text-primary-foreground md:text-4xl lg:text-5xl font-heading">
-            Your skin has a story — let's give it a better next chapter
+            {cta.title}
           </h2>
 
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/85 md:text-base">
-            One consultation with Dr. Sugandh Gandhi is enough to know what's
-            actually going on with your skin, and what to do about it.
+            {cta.description}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
