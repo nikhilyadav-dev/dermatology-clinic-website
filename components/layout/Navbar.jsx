@@ -123,7 +123,7 @@ export const Navbar = () => {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="#" className={navLinkClass}>
+                <NavigationMenuLink href="/about" className={navLinkClass}>
                   About
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -210,17 +210,25 @@ export const Navbar = () => {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="#" className={navLinkClass}>
-                  Gallery
+                <NavigationMenuLink href="/clinic" className={navLinkClass}>
+                  Clinic
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="#" className={navLinkClass}>
+                <NavigationMenuLink
+                  href="/book-consultation"
+                  className={navLinkClass}
+                >
+                  Book
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="blogsf" className={navLinkClass}>
                   Blog
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="#" className={navLinkClass}>
+                <NavigationMenuLink href="/contact" className={navLinkClass}>
                   Contact
                 </NavigationMenuLink>
               </NavigationMenuItem>
