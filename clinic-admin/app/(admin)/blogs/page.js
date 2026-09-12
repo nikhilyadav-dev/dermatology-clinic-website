@@ -1,89 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
-const blogs = [
-  {
-    id: 1,
-    title: "5 Things You Should Know About Acne",
-    category: "Acne",
-    status: "Published",
-    date: "10 Sep 2026",
-    author: "Admin",
-  },
-  {
-    id: 2,
-    title: "Understanding Hair Loss in Women",
-    category: "Hair Care",
-    status: "Published",
-    date: "07 Sep 2026",
-    author: "Admin",
-  },
-  {
-    id: 3,
-    title: "Complete Guide to Chemical Peels",
-    category: "Skin Treatments",
-    status: "Draft",
-    date: "05 Sep 2026",
-    author: "Admin",
-  },
-  {
-    id: 4,
-    title: "How to Protect Your Skin From Sun Damage",
-    category: "Skin Care",
-    status: "Published",
-    date: "02 Sep 2026",
-    author: "Admin",
-  },
-  {
-    id: 5,
-    title: "A Beginner's Guide to Skin Hydration",
-    category: "Skin Care",
-    status: "Draft",
-    date: "30 Aug 2026",
-    author: "Admin",
-  },
-  {
-    id: 6,
-    title: "When Should You See a Dermatologist?",
-    category: "Skin Care",
-    status: "Published",
-    date: "27 Aug 2026",
-    author: "Admin",
-  },
-  {
-    id: 7,
-    title: "Understanding Different Types of Acne",
-    category: "Acne",
-    status: "Published",
-    date: "24 Aug 2026",
-    author: "Admin",
-  },
-  {
-    id: 8,
-    title: "PRP Treatment for Hair Loss",
-    category: "Hair Care",
-    status: "Draft",
-    date: "21 Aug 2026",
-    author: "Admin",
-  },
-  {
-    id: 9,
-    title: "Daily Skincare Routine for Healthy Skin",
-    category: "Skin Care",
-    status: "Published",
-    date: "18 Aug 2026",
-    author: "Admin",
-  },
-  {
-    id: 10,
-    title: "What Causes Facial Pigmentation?",
-    category: "Pigmentation",
-    status: "Published",
-    date: "15 Aug 2026",
-    author: "Admin",
-  },
-];
+import { useEffect, useMemo, useState } from "react";
+import { getBlogs } from "./actions";
+import { useRouter } from "next/navigation";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -124,6 +43,7 @@ function EmptyState({ search, statusFilter }) {
         <button
           type="button"
           className="mt-5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-hover"
+          onClick={() => router.push("/blogs/new")}
         >
           + Add Blog
         </button>
@@ -149,27 +69,58 @@ function LoadingState() {
 }
 
 export default function BlogsPage() {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    async function loadBlogs() {
+      const result = await getBlogs();
+
+      if (result.success) {
+        setBlogs(
+          result.blogs.map((blog) => ({
+            id: blog.id,
+            title: blog.title,
+            category: blog.category.name,
+            status: blog.status === "PUBLISHED" ? "Published" : "Draft",
+            date: new Date(
+              blog.publishedAt || blog.createdAt,
+            ).toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            }),
+            author: blog.author.name,
+          })),
+        );
+      } else {
+        console.error("Failed to load blogs:", result.error);
+      }
+
+      setIsLoading(false);
+    }
+
+    loadBlogs();
+  }, []);
 
   const filteredBlogs = useMemo(() => {
     return blogs.filter((blog) => {
-      const searchTerm = search.trim().toLowerCase();
-
-      const matchesSearch =
-        !searchTerm ||
-        blog.title.toLowerCase().includes(searchTerm) ||
-        blog.category.toLowerCase().includes(searchTerm);
+      const matchesSearch = blog.title
+        .toLowerCase()
+        .includes(search.toLowerCase());
 
       const matchesStatus =
         statusFilter === "All" || blog.status === statusFilter;
 
       return matchesSearch && matchesStatus;
     });
-  }, [search, statusFilter]);
-
+  }, [blogs, search, statusFilter]);
   const totalPages = Math.ceil(filteredBlogs.length / ITEMS_PER_PAGE);
 
   const paginatedBlogs = filteredBlogs.slice(
@@ -204,6 +155,7 @@ export default function BlogsPage() {
         <button
           type="button"
           className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
+          onClick={() => router.push("/blogs/new")}
         >
           + Add Blog
         </button>
@@ -315,6 +267,9 @@ export default function BlogsPage() {
                           <button
                             type="button"
                             className="rounded-md px-3 py-1.5 text-xs font-medium text-muted hover:bg-background hover:text-foreground"
+                            onClick={() =>
+                              router.push(`/blogs/${blog.id}/edit`)
+                            }
                           >
                             Edit
                           </button>
@@ -364,6 +319,7 @@ export default function BlogsPage() {
                     <button
                       type="button"
                       className="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted hover:bg-background hover:text-foreground"
+                      onClick={() => router.push(`/blogs/${blog.id}/edit`)}
                     >
                       Edit
                     </button>

@@ -81,20 +81,50 @@ export default function NewBlogPage() {
     }
   };
 
-  const handleSubmit = (status) => {
+  const handleSubmit = async (status) => {
+    if (!form.title.trim()) {
+      alert("Please enter a blog title.");
+      return;
+    }
+
+    if (!form.slug.trim()) {
+      alert("Please enter a blog slug.");
+      return;
+    }
+
+    if (!form.excerpt.trim()) {
+      alert("Please enter an excerpt.");
+      return;
+    }
+
+    if (!form.content.trim()) {
+      alert("Please add blog content.");
+      return;
+    }
+
+    if (!form.category) {
+      alert("Please select a category.");
+      return;
+    }
+
     setIsSaving(true);
 
     const blogData = {
       ...form,
       status,
+      categoryId: form.category,
     };
 
-    console.log("Blog data:", blogData);
+    const result = await createBlog(blogData);
 
-    setTimeout(() => {
+    if (!result.success) {
+      console.error(result.error);
+      alert(result.error || "Failed to create blog.");
       setIsSaving(false);
-      router.push("/blogs");
-    }, 800);
+      return;
+    }
+
+    router.push("/blogs");
   };
 
   return (
@@ -501,8 +531,8 @@ export default function NewBlogPage() {
                   <option value="">Select category</option>
 
                   {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
+                    <option key={category.slug} value={category.slug}>
+                      {category.name}
                     </option>
                   ))}
                 </select>
