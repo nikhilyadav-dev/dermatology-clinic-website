@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { getBlogs } from "./actions";
+import { getBlogs, deleteBlog } from "./actions";
 import { useRouter } from "next/navigation";
 
 const ITEMS_PER_PAGE = 5;
@@ -22,6 +22,7 @@ function StatusBadge({ status }) {
 
 function EmptyState({ search, statusFilter }) {
   const hasFilters = search || statusFilter !== "All";
+  const router = useRouter();
 
   return (
     <div className="rounded-xl border border-border bg-surface px-5 py-12 text-center">
@@ -136,6 +137,23 @@ export default function BlogsPage() {
   function handleStatusChange(value) {
     setStatusFilter(value);
     setCurrentPage(1);
+  }
+
+  async function handleDelete(id) {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this blog?",
+    );
+
+    if (!confirmed) return;
+
+    const result = await deleteBlog(id);
+
+    if (!result.success) {
+      alert(result.error || "Failed to delete blog.");
+      return;
+    }
+
+    setBlogs((prev) => prev.filter((blog) => blog.id !== id));
   }
 
   return (
@@ -277,6 +295,7 @@ export default function BlogsPage() {
                           <button
                             type="button"
                             className="rounded-md px-3 py-1.5 text-xs font-medium text-red-500 hover:bg-red-50"
+                            onClick={() => handleDelete(blog.id)}
                           >
                             Delete
                           </button>
@@ -327,6 +346,7 @@ export default function BlogsPage() {
                     <button
                       type="button"
                       className="rounded-md px-2.5 py-1.5 text-xs font-medium text-red-500 hover:bg-red-50"
+                      onClick={() => handleDelete(blog.id)}
                     >
                       Delete
                     </button>
