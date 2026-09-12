@@ -2,14 +2,31 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import RichTextEditor from "@/components/blog/RichTextEditor";
+import { createBlog } from "../actions";
 
 const categories = [
-  "Skin Care",
-  "Acne",
-  "Hair Care",
-  "Anti-Aging",
-  "Treatments",
+  {
+    name: "Skin Care",
+    slug: "skin-care",
+  },
+  {
+    name: "Hair Care",
+    slug: "hair-care",
+  },
+  {
+    name: "Treatments",
+    slug: "treatments",
+  },
+  {
+    name: "Skin Health",
+    slug: "skin-health",
+  },
+  {
+    name: "Clinic Updates",
+    slug: "clinic-updates",
+  },
 ];
 
 export default function NewBlogPage() {

@@ -8,11 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
     "@tiptap/extension-link": "^3.31.3",
     "@tiptap/react": "^3.31.3",
     "@tiptap/starter-kit": "^3.31.3",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
     "next": "16.3.5",
+    "pg": "^8.23.0",
     "prisma": "^7.10.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
