@@ -5,6 +5,8 @@ import { useState } from "react";
 import { initialBookingData } from "@/data/booking/initialBookingData";
 import { bookingConfig } from "@/data/booking/config";
 
+import { createConsultation } from "@/app/book-consultation/actions";
+
 import { validateStep } from "@/lib/booking/validation";
 
 import BookingProgress from "./BookingProgress";
@@ -129,6 +131,30 @@ export default function BookingForm() {
     }
   };
 
+  // const handleSubmit = async () => {
+  //   const stepErrors = validateStep("review", bookingData);
+
+  //   if (Object.keys(stepErrors).length > 0) {
+  //     setErrors(stepErrors);
+  //     return;
+  //   }
+
+  //   setSubmissionStatus("submitting");
+
+  //   try {
+  //     // Temporary simulation.
+  //     // This will be replaced with the backend API later.
+  //     await new Promise((resolve) => {
+  //       setTimeout(resolve, 1500);
+  //     });
+
+  //     setSubmissionStatus("success");
+  //   } catch (error) {
+  //     console.error(error);
+  //     setSubmissionStatus("error");
+  //   }
+  // };
+
   const handleSubmit = async () => {
     const stepErrors = validateStep("review", bookingData);
 
@@ -140,19 +166,18 @@ export default function BookingForm() {
     setSubmissionStatus("submitting");
 
     try {
-      // Temporary simulation.
-      // This will be replaced with the backend API later.
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1500);
-      });
+      const result = await createConsultation(bookingData);
+
+      if (!result.success) {
+        throw new Error(result.error);
+      }
 
       setSubmissionStatus("success");
     } catch (error) {
-      console.error(error);
+      console.error("Consultation submission error:", error);
       setSubmissionStatus("error");
     }
   };
-
   const isFirstStep = currentStep === 0;
 
   if (submissionStatus === "success") {
