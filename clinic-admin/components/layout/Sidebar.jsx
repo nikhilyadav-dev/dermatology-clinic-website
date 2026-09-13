@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { logout } from "@/app/(admin)/logout/actions";
 
 const navigation = [
   {
@@ -91,12 +92,14 @@ export default function Sidebar({ isOpen, onClose }) {
 
         {/* Logout */}
         <div className="shrink-0 border-t border-border p-4">
-          <button
-            type="button"
-            className="w-full rounded-lg px-4 py-3 text-left text-sm font-medium text-muted transition-colors hover:bg-background hover:text-foreground"
-          >
-            Logout
-          </button>
+          <form action={logout}>
+            <button
+              type="submit"
+              className="w-full rounded-lg px-4 py-3 text-left text-sm font-medium text-muted transition-colors hover:bg-background hover:text-foreground"
+            >
+              Logout
+            </button>
+          </form>
         </div>
       </aside>
     </>
