@@ -223,7 +223,7 @@ export const Navbar = () => {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="blogsf" className={navLinkClass}>
+                <NavigationMenuLink href="blogs" className={navLinkClass}>
                   Blog
                 </NavigationMenuLink>
               </NavigationMenuItem>

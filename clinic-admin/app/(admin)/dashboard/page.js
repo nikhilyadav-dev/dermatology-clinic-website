@@ -1,72 +1,25 @@
-const stats = [
-  {
-    title: "Total Blogs",
-    value: "24",
-    description: "All blog posts",
-  },
-  {
-    title: "Published",
-    value: "18",
-    description: "Live on website",
-  },
-  {
-    title: "Drafts",
-    value: "6",
-    description: "Waiting to publish",
-  },
-  {
-    title: "New Consultations",
-    value: "8",
-    description: "Needs attention",
-  },
-];
-
-const recentConsultations = [
-  {
-    name: "Priya Sharma",
-    concern: "Acne & Acne Scars",
-    date: "12 Sep 2026",
-    status: "New",
-  },
-  {
-    name: "Rahul Verma",
-    concern: "Hair Loss",
-    date: "11 Sep 2026",
-    status: "Contacted",
-  },
-  {
-    name: "Ananya Singh",
-    concern: "Pigmentation",
-    date: "10 Sep 2026",
-    status: "Confirmed",
-  },
-];
-
-const recentBlogs = [
-  {
-    title: "5 Things You Should Know About Acne",
-    status: "Published",
-    date: "10 Sep 2026",
-  },
-  {
-    title: "Understanding Hair Loss in Women",
-    status: "Published",
-    date: "07 Sep 2026",
-  },
-  {
-    title: "Complete Guide to Chemical Peels",
-    status: "Draft",
-    date: "05 Sep 2026",
-  },
-];
+import Link from "next/link";
+import { getDashboardStats } from "./actions";
 
 function StatusBadge({ status }) {
   const styles = {
-    New: "bg-primary/10 text-primary",
-    Contacted: "bg-blue-50 text-blue-600",
-    Confirmed: "bg-green-50 text-green-600",
-    Published: "bg-green-50 text-green-600",
-    Draft: "bg-gray-100 text-gray-600",
+    NEW: "bg-primary/10 text-primary",
+    CONTACTED: "bg-blue-50 text-blue-600",
+    CONFIRMED: "bg-green-50 text-green-600",
+    COMPLETED: "bg-gray-100 text-gray-600",
+    CANCELLED: "bg-red-50 text-red-600",
+    PUBLISHED: "bg-green-50 text-green-600",
+    DRAFT: "bg-gray-100 text-gray-600",
+  };
+
+  const labels = {
+    NEW: "New",
+    CONTACTED: "Contacted",
+    CONFIRMED: "Confirmed",
+    COMPLETED: "Completed",
+    CANCELLED: "Cancelled",
+    PUBLISHED: "Published",
+    DRAFT: "Draft",
   };
 
   return (
@@ -75,25 +28,66 @@ function StatusBadge({ status }) {
         styles[status] || "bg-gray-100 text-gray-600"
       }`}
     >
-      {status}
+      {labels[status] || status}{" "}
     </span>
   );
 }
 
-export default function DashboardPage() {
+function formatDate(date) {
+  if (!date) return "-";
+
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
+export default async function DashboardPage() {
+  const result = await getDashboardStats();
+
+  const stats = [
+    {
+      title: "Total Blogs",
+      value: result.stats.totalBlogs,
+      description: "All blog posts",
+    },
+    {
+      title: "Published",
+      value: result.stats.publishedBlogs,
+      description: "Live on website",
+    },
+    {
+      title: "Drafts",
+      value: result.stats.draftBlogs,
+      description: "Waiting to publish",
+    },
+    {
+      title: "New Consultations",
+      value: result.stats.newConsultations,
+      description: "Needs attention",
+    },
+  ];
+
   return (
     <div className="p-4 sm:p-6 lg:p-8">
-      {/* Header */}
+      {/* Header */}{" "}
       <div className="mb-6 sm:mb-8">
+        {" "}
         <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-          Dashboard
+          Dashboard{" "}
         </h1>
-
+        ```
         <p className="mt-1 text-sm text-muted">
           Overview of your clinic website and recent activity.
         </p>
       </div>
-
+      {/* Error */}
+      {!result.success && (
+        <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+          {result.error}
+        </div>
+      )}
       {/* Stats */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
@@ -111,7 +105,6 @@ export default function DashboardPage() {
           </div>
         ))}
       </div>
-
       {/* Recent Activity */}
       <div className="mt-6 grid gap-6 xl:grid-cols-2">
         {/* Consultations */}
@@ -127,39 +120,45 @@ export default function DashboardPage() {
               </p>
             </div>
 
-            <a
+            <Link
               href="/consultations"
               className="text-sm font-medium text-primary hover:text-primary-hover"
             >
               View all
-            </a>
+            </Link>
           </div>
 
           <div className="divide-y divide-border">
-            {recentConsultations.map((consultation) => (
-              <div
-                key={`${consultation.name}-${consultation.date}`}
-                className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
-              >
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-foreground">
-                    {consultation.name}
-                  </p>
+            {result.recentConsultations.length > 0 ? (
+              result.recentConsultations.map((consultation) => (
+                <div
+                  key={consultation.id}
+                  className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium text-foreground">
+                      {consultation.name}
+                    </p>
 
-                  <p className="mt-1 text-xs text-muted">
-                    {consultation.concern}
-                  </p>
+                    <p className="mt-1 truncate text-xs text-muted">
+                      {consultation.concern || "General Consultation"}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-4 sm:justify-end">
+                    <span className="text-xs text-muted">
+                      {formatDate(consultation.createdAt)}
+                    </span>
+
+                    <StatusBadge status={consultation.status} />
+                  </div>
                 </div>
-
-                <div className="flex items-center justify-between gap-4 sm:justify-end">
-                  <span className="text-xs text-muted">
-                    {consultation.date}
-                  </span>
-
-                  <StatusBadge status={consultation.status} />
-                </div>
+              ))
+            ) : (
+              <div className="px-5 py-10 text-center sm:px-6">
+                <p className="text-sm text-muted">No consultations yet.</p>
               </div>
-            ))}
+            )}
           </div>
         </section>
 
@@ -172,31 +171,39 @@ export default function DashboardPage() {
               <p className="mt-1 text-xs text-muted">Latest blog activity</p>
             </div>
 
-            <a
+            <Link
               href="/blogs"
               className="text-sm font-medium text-primary hover:text-primary-hover"
             >
               View all
-            </a>
+            </Link>
           </div>
 
           <div className="divide-y divide-border">
-            {recentBlogs.map((blog) => (
-              <div
-                key={blog.title}
-                className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
-              >
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-foreground">
-                    {blog.title}
-                  </p>
+            {result.recentBlogs.length > 0 ? (
+              result.recentBlogs.map((blog) => (
+                <div
+                  key={blog.id}
+                  className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium text-foreground">
+                      {blog.title}
+                    </p>
 
-                  <p className="mt-1 text-xs text-muted">{blog.date}</p>
+                    <p className="mt-1 text-xs text-muted">
+                      {formatDate(blog.createdAt)}
+                    </p>
+                  </div>
+
+                  <StatusBadge status={blog.status} />
                 </div>
-
-                <StatusBadge status={blog.status} />
+              ))
+            ) : (
+              <div className="px-5 py-10 text-center sm:px-6">
+                <p className="text-sm text-muted">No blogs yet.</p>
               </div>
-            ))}
+            )}
           </div>
         </section>
       </div>
