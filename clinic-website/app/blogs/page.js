@@ -1,7 +1,8 @@
 import BlogCategoryFilter from "@/components/blogs/BlogCategoryFilter";
-import { blogs } from "@/data/blogs";
+import { getPublishedBlogs } from "@/lib/blog";
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const blogs = await getPublishedBlogs();
   return (
     <main className="bg-white">
       {/* Hero */}

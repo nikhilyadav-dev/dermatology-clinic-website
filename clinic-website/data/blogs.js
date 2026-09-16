@@ -3,11 +3,43 @@ export const blogs = [
     id: "blog-1",
     title: "How to Build a Skincare Routine That Actually Works",
     slug: "how-to-build-a-skincare-routine-that-actually-works",
+
     excerpt:
       "Learn how to build a simple skincare routine based on your skin type, concerns, and daily needs.",
-    featuredImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03",
+
+    content: `
+    <p>A good skincare routine does not need to be complicated.</p>
+
+    <p>The right routine depends on your skin type, concerns, and lifestyle.</p>
+
+    <h2>Start With the Basics</h2>
+
+    <p>Begin with a gentle cleanser, moisturizer, and sunscreen.</p>
+  `,
+
+    featuredImage:
+      "https://i.pinimg.com/736x/7e/f6/9a/7ef69acc5ee8a9808ba2d4fa2420dda1.jpg",
+
     imageAlt: "Woman following a skincare routine",
+
     publishedAt: "2026-09-10T10:00:00.000Z",
+
+    seoTitle: "How to Build an Effective Skincare Routine | Shine Skin Care",
+
+    metaDescription:
+      "Learn how to build a simple and effective skincare routine based on your skin type, concerns, and daily skincare needs.",
+
+    keywords: "skincare routine, skincare tips, skin care routine",
+
+    canonicalUrl:
+      "https://www.shineskincare.com/blogs/how-to-build-a-skincare-routine-that-actually-works",
+
+    ogTitle: "How to Build a Skincare Routine That Actually Works",
+
+    ogDescription:
+      "A simple guide to creating a skincare routine based on your skin type and concerns.",
+
+    ogImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03",
 
     category: {
       id: "cmtyca29g0000awvl5fi0r3sb",
