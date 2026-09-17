@@ -20,7 +20,7 @@ async function main() {
     },
     update: {},
     create: {
-      name: "Admin",
+      name: "Dr. Sugandh Gandhi",
       email: "admin@shineskincare.com",
       passwordHash,
       role: "ADMIN",

@@ -4,12 +4,14 @@ import { prisma } from "@/lib/prisma";
 
 export async function createBlog(data) {
   try {
+    const content = JSON.parse(JSON.stringify(data.content));
+
     const blog = await prisma.blog.create({
       data: {
         title: data.title,
         slug: data.slug,
         excerpt: data.excerpt,
-        content: data.content,
+        content,
 
         featuredImage: data.featuredImage || null,
         imageAlt: data.imageAlt || null,
@@ -53,7 +55,6 @@ export async function createBlog(data) {
     };
   }
 }
-
 export async function getBlogs() {
   try {
     const blogs = await prisma.blog.findMany({

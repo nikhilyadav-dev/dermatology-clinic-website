@@ -52,7 +52,7 @@ model Blog {
   title           String
   slug            String     @unique
   excerpt         String
-  content         String
+  content         Json
 
   featuredImage   String?
   imageAlt        String?

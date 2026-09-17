@@ -41,7 +41,14 @@ export default function EditBlogPage() {
     title: "",
     slug: "",
     excerpt: "",
-    content: "",
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+        },
+      ],
+    },
     status: "DRAFT",
     category: "",
     featuredImage: "",

@@ -36,7 +36,14 @@ export default function NewBlogPage() {
     title: "",
     slug: "",
     excerpt: "",
-    content: "",
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+        },
+      ],
+    },
     status: "DRAFT",
     category: "",
     featuredImage: "",
@@ -54,6 +61,7 @@ export default function NewBlogPage() {
 
   const [isSaving, setIsSaving] = useState(false);
   const [showSeo, setShowSeo] = useState(false);
+  const [isSlugManuallyEdited, setIsSlugManuallyEdited] = useState(false);
 
   const updateField = (field, value) => {
     setForm((prev) => ({
@@ -63,42 +71,47 @@ export default function NewBlogPage() {
   };
 
   const generateSlug = (value) => {
-    const slug = value
+    return value
       .toLowerCase()
       .trim()
       .replace(/[^a-z0-9\s-]/g, "")
       .replace(/\s+/g, "-")
       .replace(/-+/g, "-");
-
-    updateField("slug", slug);
   };
 
   const handleTitleChange = (value) => {
-    updateField("title", value);
-
-    if (!form.slug) {
-      generateSlug(value);
-    }
+    setForm((prev) => ({
+      ...prev,
+      title: value,
+      slug: isSlugManuallyEdited ? prev.slug : generateSlug(value),
+    }));
   };
 
+  const handleSlugChange = (value) => {
+    setIsSlugManuallyEdited(true);
+
+    setForm((prev) => ({
+      ...prev,
+      slug: generateSlug(value),
+    }));
+  };
   const handleSubmit = async (status) => {
-    if (!form.title.trim()) {
+    const title = form.title.trim();
+    const slug = generateSlug(form.slug);
+    const excerpt = form.excerpt.trim();
+
+    if (!title) {
       alert("Please enter a blog title.");
       return;
     }
 
-    if (!form.slug.trim()) {
+    if (!slug) {
       alert("Please enter a blog slug.");
       return;
     }
 
-    if (!form.excerpt.trim()) {
+    if (!excerpt) {
       alert("Please enter an excerpt.");
-      return;
-    }
-
-    if (!form.content.trim()) {
-      alert("Please add blog content.");
       return;
     }
 
@@ -107,26 +120,98 @@ export default function NewBlogPage() {
       return;
     }
 
-    setIsSaving(true);
+    const hasContent = form.content?.content?.some((node) => {
+      if (node.type !== "paragraph") {
+        return Boolean(node.content?.length);
+      }
 
-    const blogData = {
-      ...form,
-      status,
-      categoryId: form.category,
-    };
+      return node.content?.some(
+        (child) => child.type === "text" && child.text?.trim(),
+      );
+    });
 
-    const result = await createBlog(blogData);
-
-    if (!result.success) {
-      console.error(result.error);
-      alert(result.error || "Failed to create blog.");
-      setIsSaving(false);
+    if (!hasContent) {
+      alert("Please add blog content.");
       return;
     }
 
-    router.push("/blogs");
-  };
+    if (!["DRAFT", "PUBLISHED"].includes(status)) {
+      alert("Invalid blog status.");
+      return;
+    }
 
+    const validateUrl = (value) => {
+      if (!value?.trim()) return true;
+
+      try {
+        new URL(value.trim());
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    if (!validateUrl(form.featuredImage)) {
+      alert("Please enter a valid featured image URL.");
+      return;
+    }
+
+    if (form.featuredImage?.trim() && !form.imageAlt.trim()) {
+      alert("Please add alt text for the featured image.");
+      return;
+    }
+
+    if (!validateUrl(form.canonicalUrl)) {
+      alert("Please enter a valid canonical URL.");
+      return;
+    }
+
+    if (!validateUrl(form.ogImage)) {
+      alert("Please enter a valid OG image URL.");
+      return;
+    }
+
+    setIsSaving(true);
+
+    try {
+      const blogData = {
+        ...form,
+
+        title,
+        slug,
+        excerpt,
+
+        status,
+
+        categoryId: form.category,
+
+        content: JSON.parse(JSON.stringify(form.content)),
+      };
+
+      const result = await createBlog(blogData);
+
+      if (!result.success) {
+        console.error("Create blog failed:", result.error);
+
+        alert(result.error || "Failed to create blog.");
+        return;
+      }
+
+      alert(
+        status === "PUBLISHED"
+          ? "Blog published successfully."
+          : "Blog saved as draft successfully.",
+      );
+
+      router.push("/blogs");
+    } catch (error) {
+      console.error("Create blog error:", error);
+
+      alert("Something went wrong while creating the blog.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -196,7 +281,7 @@ export default function NewBlogPage() {
                   <input
                     type="text"
                     value={form.slug}
-                    onChange={(e) => updateField("slug", e.target.value)}
+                    onChange={(e) => handleSlugChange(e.target.value)}
                     placeholder="your-blog-url"
                     className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
                   />
@@ -475,21 +560,6 @@ export default function NewBlogPage() {
               </div>
 
               <div className="space-y-5 p-5">
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-foreground">
-                    Status
-                  </label>
-
-                  <select
-                    value={form.status}
-                    onChange={(e) => updateField("status", e.target.value)}
-                    className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
-                  >
-                    <option value="DRAFT">Draft</option>
-                    <option value="PUBLISHED">Published</option>
-                  </select>
-                </div>
-
                 <div className="grid gap-3">
                   <button
                     type="button"
