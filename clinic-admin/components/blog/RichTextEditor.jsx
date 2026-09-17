@@ -3,28 +3,26 @@
 import { useEffect, useRef } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { markdownToTiptap } from "@/lib/markdownToTiptap";
 
-// function ToolbarButton({
-//   onClick,
-//   active = false,
-//   disabled = false,
-//   children,
-// }) {
-//   return (
-//     <button
-//       type="button"
-//       onClick={onClick}
-//       disabled={disabled}
-//       className={`rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors ${
-//         active
-//           ? "bg-primary/10 text-primary"
-//           : "text-muted hover:bg-background hover:text-foreground"
-//       } disabled:cursor-not-allowed disabled:opacity-40`}
-//     >
-//       {children}
-//     </button>
-//   );
-// }
+import { markdownToHtml } from "@/lib/markdownToHtml";
+import { DOMParser as ProseMirrorDOMParser } from "@tiptap/pm/model";
+
+function looksLikeMarkdown(text) {
+  if (!text?.trim()) return false;
+
+  const patterns = [
+    /^#{2,3}\s+/m,
+    /^\s*[-*+]\s+/m,
+    /^\s*\d+\.\s+/m,
+    /^\s*>\s+/m,
+    /\*\*.+?\*\*/,
+    /(?<!\*)\*[^*]+\*(?!\*)/,
+    /\[[^\]]+\]\([^)]+\)/,
+  ];
+
+  return patterns.some((pattern) => pattern.test(text));
+}
 
 function ToolbarButton({
   onClick,
@@ -83,11 +81,35 @@ export default function RichTextEditor({ value, onChange }) {
           class:
             "min-h-[400px] px-5 py-5 outline-none prose prose-sm max-w-none text-foreground",
         },
+        handlePaste(view, event) {
+          const text = event.clipboardData?.getData("text/plain");
+
+          if (!text || !looksLikeMarkdown(text)) {
+            return false;
+          }
+
+          try {
+            const html = markdownToHtml(text);
+
+            const parser = ProseMirrorDOMParser.fromSchema(view.state.schema);
+
+            const container = document.createElement("div");
+            container.innerHTML = html;
+
+            const slice = parser.parseSlice(container);
+
+            view.dispatch(view.state.tr.replaceSelection(slice));
+
+            return true;
+          } catch (error) {
+            console.error("Markdown paste error:", error);
+            return false;
+          }
+        },
       },
     },
     [],
-  ); // create once
-
+  );
   // Sync external value changes (e.g. async-loaded content) into the editor.
   useEffect(() => {
     if (!editor || !value) return;
