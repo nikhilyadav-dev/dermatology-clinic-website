@@ -89,6 +89,59 @@ It isn't just a clinic website — the project combines a **patient-facing platf
 
 ---
 
+# 🏗️ System Architecture
+
+The platform is split into a public application and an administrative application while sharing the same PostgreSQL data model.
+
+```mermaid
+graph TD
+
+    VISITOR[Patient / Visitor]
+
+    subgraph WEBSITE["Clinic Website"]
+        HOME[Home]
+        TREATMENTS[Treatments]
+        CONCERNS[Concerns]
+        BLOGS[Blogs]
+        BOOKING[Consultation Booking]
+        CLINIC[Clinic]
+        ABOUT[About]
+        CONTACT[Contact]
+    end
+
+    subgraph ADMIN["Admin Dashboard"]
+        AUTH[Admin Authentication]
+        DASHBOARD[Dashboard]
+        CONSULTATIONS[Consultation Management]
+        BLOGCMS[Blog CMS]
+    end
+
+    SERVER[Next.js Server Actions]
+    PRISMA[Prisma ORM]
+    DB[(PostgreSQL)]
+
+    VISITOR --> HOME
+    VISITOR --> TREATMENTS
+    VISITOR --> CONCERNS
+    VISITOR --> BLOGS
+    VISITOR --> BOOKING
+    VISITOR --> CLINIC
+    VISITOR --> ABOUT
+    VISITOR --> CONTACT
+
+    BOOKING --> SERVER
+    BLOGS --> SERVER
+
+    AUTH --> DASHBOARD
+    DASHBOARD --> SERVER
+    CONSULTATIONS --> SERVER
+    BLOGCMS --> SERVER
+
+    SERVER --> PRISMA
+    PRISMA --> DB
+```
+---
+
 ## 🌐 Public Website
 
 The public application is the **patient-facing layer of Shine Clinic**, built with Next.js and structured around reusable, data-driven content rather than individually hardcoded pages.
@@ -1022,9 +1075,6 @@ The stack is intentionally centered around Next.js rather than introducing a sep
 
 ---
 
-
----
-
 ## 🔐 Environment Variables
 
 Sensitive configuration is kept outside the source code through environment variables.
@@ -1159,62 +1209,48 @@ For local development, the database connection should point to a PostgreSQL inst
 
 ## 📈 Scalability & Production Considerations
 
-The project is structured so that individual parts of the platform can evolve without requiring a complete architectural rewrite.
-
-### Current Architectural Considerations
-
-**1. Relational Data Model**
-
-PostgreSQL provides structured relationships between users, categories, blogs, and consultations.
-
-**2. Database Indexing**
-
-Frequently queried fields such as consultation status, creation date, blog status, category, author, and publication date are indexed.
-
-**3. Server-side Mutations**
-
-Sensitive database mutations are performed through Next.js Server Actions rather than exposing database operations directly to the browser.
-
-**4. Authentication Boundary**
-
-Administrative functionality is isolated behind authenticated `ADMIN` sessions.
-
-**5. Data-driven Content**
-
-Treatment and concern pages are generated from reusable content structures instead of requiring a completely separate page implementation for every entry.
-
-**6. Application Separation**
-
-The public website and admin dashboard are separate applications, allowing their interfaces and deployment strategies to evolve independently.
-
-### Future Scaling Path
+The architecture is designed to scale without introducing unnecessary complexity from the beginning.
 
 ```text
 Current Architecture
         │
         ▼
-   PostgreSQL
+ Next.js Applications
         │
-        ├── Database Optimization
-        ├── Connection Pooling
-        ├── Caching
-        └── Query Optimization
-                │
-                ▼
-        Production Infrastructure
-                │
-                ├── CDN / Edge Caching
-                ├── Object Storage
-                ├── Monitoring
-                └── Error Tracking
+        ▼
+ Prisma + PostgreSQL
+        │
+        ▼
+   Production Scale
+        │
+   ┌────┼────┐
+   ▼    ▼    ▼
+ Cache  DB   CDN
+        │
+        ▼
+  Monitoring
 ```
 
-The architecture provides a foundation for adding additional operational requirements as traffic, content volume, and clinic workflows grow.
+### ⚡ Scaling Strategy
+
+| Area            | Current             | Production Path              |
+| --------------- | ------------------- | ---------------------------- |
+| **Application** | Next.js             | Horizontal scaling           |
+| **Database**    | PostgreSQL + Prisma | Pooling + query optimization |
+| **Content**     | Dynamic routes      | Caching + revalidation       |
+| **Media**       | Application assets  | Object storage + CDN         |
+| **Monitoring**  | Basic handling      | Logs + metrics + alerts      |
+
+### 🧠 Core Principle
+
+> **Keep the architecture simple initially. Measure real bottlenecks, then scale the part that needs it.**
+
+The separation between the **public website**, **admin dashboard**, and **shared database** provides clear boundaries for future scaling.
 
 ---
 
 
-## 🧠 Engineering Highlights
+## 🚀 Engineering Highlights
 
 Shine Clinic was designed around a few core engineering principles:
 
@@ -1266,12 +1302,15 @@ Full-Stack Developer focused on building modern web applications with **React, N
 Build → Learn → Improve → Ship
 ```
 
+
 ### Connect
 
-* 💼 LinkedIn — Add your profile
-* 🐙 GitHub — Add your profile
-* 🌐 Portfolio — Add your portfolio
+## 🛠️ Engineering Highlights
 
+### Connect
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nikhilyadav-developer/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/nikhilyadav-dev)
 ---
 
 ## ⭐ Project
